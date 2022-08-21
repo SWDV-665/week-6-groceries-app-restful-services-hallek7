@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+    <ion-title>
+      <h1>{{title}} </h1>
+    </ion-title>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="ion-text-center">
+  <h2> Welcome to Grocery App! </h2> 
+  <h3 class="no-item" *ngIf="loadItems().length === 0">
+    No item available on the list! </h3>
+  </div>
+
+  <ion-list>
+    <!-- Sliding item with text options on both sides -->
+    <ion-item-sliding  *ngFor="let item of loadItems(); let i = index">
+      <ion-item-options side="start">
+
+      <ion-item-option (click)="editItem(item,i)">Edit <ion-icon name="create-outline"></ion-icon></ion-item-option> 
+      <ion-item-option color="danger" (click)="removeItem(item,i)">Delete <ion-icon name="trash-outline"></ion-icon></ion-item-option> 
+      </ion-item-options>
+  
+      <ion-item  padding>
+        <ion-label > {{item.name}}</ion-label>
+        <h3> {{item.quantity}}</h3>
+        
+      </ion-item>
+  
+      <ion-item-options side="end">
+        <ion-item-option (click)="shareItem(item,i)">Share <ion-icon name="share-outline"></ion-icon> </ion-item-option>
+        
+        <ion-item-option color="success" (click)="unread(item)">Add Cart <ion-icon name="cart-outline"></ion-icon> </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+    
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addItem(item)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      
+    </ion-toolbar>
+  </ion-header>
+
+  
+</ion-content>
